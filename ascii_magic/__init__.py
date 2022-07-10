@@ -338,7 +338,8 @@ def quick_test() -> None:
 # From URL
 def _from_url(url: str) -> Image.Image:
 	try:
-		with urllib.request.urlopen(url) as response:
+		req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+		with urllib.request.urlopen(req) as response:
 			return Image.open(response)
 	except urllib.error.HTTPError as e:
 		raise e from None
